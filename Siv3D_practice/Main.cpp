@@ -4,88 +4,117 @@ void Main()
 {
 	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
 
-	const Texture emoji{ U"☃️"_emoji };
+	const Texture emoji{ U"🍪"_emoji };
 
-	// 移動の速さ（ピクセル / 秒）
-	const double speed = 200;
-
-	Vec2 pos{ 400, 300 };
+	const Circle circle{ 200, 200, 50 };
 
 	while (System::Update())
 	{
-		const double deltaTime = Scene::DeltaTime();
-
-		// ← キーが押されていたら
-		if (KeyLeft.pressed())
+		// 円の上にマウスカーソルがあれば
+		if (circle.mouseOver())
 		{
-			pos.x -= (speed * deltaTime);
+			// マウスカーソルを手のアイコンにする
+			Cursor::RequestStyle(CursorStyle::Hand);
 		}
 
-		// → キーが押されていたら
-		if (KeyRight.pressed())
+		// 円を左クリックしたら
+		if (circle.leftClicked())
 		{
-			pos.x += (speed * deltaTime);
+			Print << U"クッキーをクリック";
 		}
 
-		// ↑ キーが押されていたら
-		if (KeyUp.pressed())
-		{
-			pos.y -= (speed * deltaTime);
-		}
+		// 円は描かない
+		// circle.draw()
 
-		// ↓ キーが押されていたら
-		if (KeyDown.pressed())
-		{
-			pos.y += (speed * deltaTime);
-		}
-
-		emoji.drawAt(pos);
+		// circle.center は Vec2 { circle.x, circle.y } と同じ
+		emoji.drawAt(circle.center, Palette::Orange);
 	}
 }
 
-// キーが押されたか調べる
+// マウスクリックを調べる
 
 //while (System::Update())
 //{
-//	//  A キーが押されたら
-//	if (KeyA.down())
+//	// 左クリックされたら
+//	if (MouseL.down())
 //	{
-//		Print << U"A";
+//		Print << U"左クリック";
 //	}
 //
-//	// スペースキーが押されたら
-//	if (KeySpace.down())
+//	// 右クリックされたら
+//	if (MouseR.down())
 //	{
-//		Print << U"Space";
-//	}
-//
-//	// 1 キーが押されたら
-//	if (Key1.down())
-//	{
-//		Print << U"1";
+//		Print << U"右クリック";
 //	}
 //}
 
 
-// キーが押されているか調べる
+// マウスカーソルの座標に移動する
 
+//const Texture emoji{ U"☃️"_emoji };
+//
+//Vec2 pos{ 400, 300 };
+//
 //while (System::Update())
 //{
-//	// A キーが押されていたら
-//	if (KeyA.pressed())
+//	// 左クリックされたら
+//	if (MouseL.down())
 //	{
-//		Print << U"A";
+//		// 現在のマウスカーソルの座標を代入
+//		pos = Cursor::Pos();
 //	}
 //
-//	// スペースキーが押されていたら
-//	if (KeySpace.pressed())
+//	emoji.drawAt(pos);
+//}
+
+
+// 図形をクリックしたかを調べる
+
+//const Circle circle{ 200, 200, 50 };
+//
+//const Rect rect{ 400, 400, 200, 40 };
+//
+//while (System::Update())
+//{
+//	// 円を左クリックしたら
+//	if (circle.leftClicked())
 //	{
-//		Print << U"Space";
+//		Print << U"円をクリック";
 //	}
 //
-//	// 1 キーが押されていたら
-//	if (Key1.pressed())
+//	// 長方形を左クリックしたら
+//	if (rect.leftClicked())
 //	{
-//		Print << U"1";
+//		Print << U"長方形をクリック";
 //	}
+//
+//	circle.draw(Palette::Orange);
+//
+//	rect.draw();
+//}
+
+
+// 図形の上にマウスカーソルがあるかを調べる
+
+//const Circle circle{ 200, 200, 50 };
+//
+//const Rect rect{ 400, 400, 200, 40 };
+//
+//while (System::Update())
+//{
+//	// 円の上にマウスカーソルがあれば
+//	if (circle.mouseOver())
+//	{
+//		Print << U"円の上にある";
+//	}
+//
+//	// 長方形の上にマウスカーソルがあれば
+//	if (rect.mouseOver())
+//	{
+//		Print << U"長方形の上にある";
+//	}
+//
+//	circle.draw(Palette::Orange);
+//
+//	rect.draw();
 //}
