@@ -2,20 +2,22 @@
 
 void Main()
 {
-	// 画像ファイルから画像データを読み込んでテクスチャを作成する
-	// このようにメインループの前に作成しないと動作が重くなってしまう
-	const Texture texture{ U"example/windmill.png" };
+	// ウィンドウを閉じる操作のみを終了操作に設定する。
+	// System::SetTerminationTriggers(UserAction::CloseButtonClicked);
+
+	// 終了操作を設定しない。
+	System::SetTerminationTriggers(UserAction::NoAction);
+
+	// デフォルトの終了操作に戻す。
+	System::SetTerminationTriggers(UserAction::Default);
 
 	while (System::Update())
 	{
-		// 1 秒間に何回メインループが実行されているかを取得する
-		int32 fps = Profiler::FPS();
-
-		// 1 秒間に何回メインループが実行されているかを、ウィンドウタイトルに表示する
-		Window::SetTitle(fps);
-
-		// テクスチャを描画する
-		texture.draw();
+		// 実行時間が 5 秒以上経過したら
+		if (5.0 <= Scene::Time())
+		{
+			System::Exit();
+		}
 	}
 }
 
