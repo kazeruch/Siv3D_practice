@@ -2,22 +2,21 @@
 
 void Main()
 {
-	// ウィンドウを閉じる操作のみを終了操作に設定する。
-	// System::SetTerminationTriggers(UserAction::CloseButtonClicked);
+	Print << U"C++";
 
-	// 終了操作を設定しない。
-	System::SetTerminationTriggers(UserAction::NoAction);
+	Print << U"Hello, " << U"Siv3D"; // 複数に分けることもできる
 
-	// デフォルトの終了操作に戻す。
-	System::SetTerminationTriggers(UserAction::Default);
+	Print << 123;
+
+	Print << 4.567;
+
+	int32 count = 0;
 
 	while (System::Update())
 	{
-		// 実行時間が 5 秒以上経過したら
-		if (5.0 <= Scene::Time())
-		{
-			System::Exit();
-		}
+		Print << count;
+
+		++count;
 	}
 }
 
