@@ -3,13 +3,13 @@
 void Main()
 {
 	// 背景の色を設定する | Set the background color
-	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
+	Scene::SetBackground(ColorF{ 0.3, 0.3, 0.3 });
 
 	// 画像ファイルからテクスチャを作成する | Create a texture from an image file
 	const Texture texture{ U"example/windmill.png" };
 
 	// 絵文字からテクスチャを作成する | Create a texture from an emoji
-	const Texture emoji{ U"🦖"_emoji };
+	const Texture emoji{ U"😂"_emoji };
 
 	// 太文字のフォントを作成する | Create a bold font with MSDF method
 	const Font font{ FontMethod::MSDF, 48, Typeface::Bold };
@@ -36,10 +36,10 @@ void Main()
 	while (System::Update())
 	{
 		// テクスチャを描く | Draw the texture
-		texture.draw(20, 20);
+		texture.draw(40, 20);
 
 		// テキストを描く | Draw text
-		font(U"Hello, Siv3D!🎮").draw(64, Vec2{ 20, 340 }, ColorF{ 0.2, 0.4, 0.8 });
+		font(U"Hello, world!🎮").draw(64, Vec2{ 20, 340 }, ColorF{ 0.2, 0.4, 0.8 });
 
 		// 指定した範囲内にテキストを描く | Draw text within a specified area
 		font(U"Siv3D (シブスリーディー) は、ゲームやアプリを楽しく簡単な C++ コードで開発できるフレームワークです。")
@@ -52,13 +52,13 @@ void Main()
 		RoundRect{ 680, 20, 80, 200, 20 }.draw(ColorF{ 0.0, 0.4, 0.6 });
 
 		// 円を描く | Draw a circle
-		Circle{ 580, 180, 40 }.draw(Palette::Seagreen);
+		Circle{ 580, 180, 60 }.draw(Palette::Green);
 
 		// 矢印を描く | Draw an arrow
 		Line{ 540, 330, 760, 260 }.drawArrow(8, SizeF{ 20, 20 }, ColorF{ 0.4 });
 
 		// 半透明の円を描く | Draw a semi-transparent circle
-		Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1.0, 0.0, 0.0, 0.5 });
+		Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1.0, 0.0, 0.0, 0.3 });
 
 		// ボタン | Button
 		if (SimpleGUI::Button(U"count: {}"_fmt(count), Vec2{ 520, 370 }, 120, (checked == false)))
@@ -74,7 +74,7 @@ void Main()
 		SimpleGUI::Slider(U"speed: {:.1f}"_fmt(speed), speed, 100, 400, Vec2{ 520, 420 }, 140, 120);
 
 		// 左キーが押されていたら | If left key is pressed
-		if (KeyLeft.pressed())
+		if (KeyUp.pressed()) // changed from Left to Up
 		{
 			// プレイヤーが左に移動する | Player moves left
 			playerPosX = Max((playerPosX - speed * Scene::DeltaTime()), 60.0);
@@ -82,7 +82,7 @@ void Main()
 		}
 
 		// 右キーが押されていたら | If right key is pressed
-		if (KeyRight.pressed())
+		if (KeyDown.pressed()) // changed from Right to Down
 		{
 			// プレイヤーが右に移動する | Player moves right
 			playerPosX = Min((playerPosX + speed * Scene::DeltaTime()), 740.0);
@@ -90,7 +90,7 @@ void Main()
 		}
 
 		// プレイヤーを描く | Draw the player
-		emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, 540);
+		emoji.scaled(1.00).mirrored(isPlayerFacingRight).drawAt(playerPosX, 540);
 	}
 }
 
