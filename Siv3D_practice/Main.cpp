@@ -2,23 +2,52 @@
 
 void Main()
 {
-	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
+	/*int32 score = 1234;
 
-	const Texture emoji1{ U"🐈"_emoji };
+	Print << U"スコア: {}"_fmt(score);
 
-	const Texture emoji2{ U"🍎"_emoji };
+	int32 month = 12;
+
+	int32 day = 31;
+
+	Print << U"今日は {} 月 {} 日"_fmt(month, day);
+
+	double x = 123.4567;
+
+	Print << x;
+
+	Print << U"{}"_fmt(x);
+
+	Print << U"{:.2f}"_fmt(x);
+
+	Print << U"{:.0f}"_fmt(x);*/
+
+	Scene::SetBackground(ColorF(0.8, 0.9, 1.0));
+
+	const Font font { FontMethod::MSDF, 48 };
+
+	// 太文字のフォント
+	const Font boldFont{ FontMethod::MSDF, 48, Typeface::Bold };
+		
+	int32 count = 0;
 
 	while (System::Update())
 	{
-		emoji1.scaled(0.6).rotated(10_deg).drawAt(100, 100);
+		font(U"C++").draw(50, Vec2{ 100, 100 }, Palette::Black);
 
-		emoji2.scaled(0.3).rotated(180_deg).drawAt(200, 300);
+		boldFont(U"Siv{}D"_fmt(count)).draw(80, Vec2{ 200, 200 }, ColorF{ 0.2, 0.6, 0.9 });
 
-		const int32 cursorX = Cursor::Pos().x;
+		font(U"こんにちは").draw(25, Vec2{ 100, 400 }, ColorF{ 0.4 });
 
-		emoji1.mirrored(400 <= cursorX).drawAt(400, 300);
+		font(count).draw(50, Vec2{ 300, 500 });
 
-		emoji2.drawAt(Cursor::Pos());
+		++count;
+
+		font(U"Siv3D").draw(50, Arg::rightCenter(780, 300), ColorF{ 0.1 });
+
+		font(U"Hello").draw(50, Arg::rightCenter(780, 400), ColorF{ 0.1 });
+
+		font(U"programming").draw(50, Arg::bottomCenter(Cursor::Pos()), ColorF{ 0.1 });
 	}
 }
 
