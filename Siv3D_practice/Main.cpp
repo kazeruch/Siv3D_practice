@@ -2,14 +2,20 @@
 
 void Main()
 {
+	// 画像ファイルから画像データを読み込んでテクスチャを作成する
+	// このようにメインループの前に作成しないと動作が重くなってしまう
+	const Texture texture{ U"example/windmill.png" };
+
 	while (System::Update())
 	{
-		if (3.0 <= Scene::Time())
-		{
-			System::Exit();
-		}
-	}
-} // ここで Main() が終了
+		// 1 秒間に何回メインループが実行されているかを取得する
+		int32 fps = Profiler::FPS();
 
-// System::Exit() は、System::Update() が false を返すように設定するだけの関数。
+		// 1 秒間に何回メインループが実行されているかを、ウィンドウタイトルに表示する
+		Window::SetTitle(fps);
+
+		// テクスチャを描画する
+		texture.draw();
+	}
+}
 
