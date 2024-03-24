@@ -2,52 +2,131 @@
 
 void Main()
 {
-	/*int32 score = 1234;
+	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
 
-	Print << U"スコア: {}"_fmt(score);
+	const Font font{ FontMethod::MSDF, 48 };
 
-	int32 month = 12;
-
-	int32 day = 31;
-
-	Print << U"今日は {} 月 {} 日"_fmt(month, day);
-
-	double x = 123.4567;
-
-	Print << x;
-
-	Print << U"{}"_fmt(x);
-
-	Print << U"{:.2f}"_fmt(x);
-
-	Print << U"{:.0f}"_fmt(x);*/
-
-	Scene::SetBackground(ColorF(0.8, 0.9, 1.0));
-
-	const Font font { FontMethod::MSDF, 48 };
-
-	// 太文字のフォント
-	const Font boldFont{ FontMethod::MSDF, 48, Typeface::Bold };
-		
-	int32 count = 0;
+	// 残り時間（秒）
+	double timeLeft = 5.0;
 
 	while (System::Update())
 	{
-		font(U"C++").draw(50, Vec2{ 100, 100 }, Palette::Black);
+		timeLeft -= Scene::DeltaTime();
 
-		boldFont(U"Siv{}D"_fmt(count)).draw(80, Vec2{ 200, 200 }, ColorF{ 0.2, 0.6, 0.9 });
-
-		font(U"こんにちは").draw(25, Vec2{ 100, 400 }, ColorF{ 0.4 });
-
-		font(count).draw(50, Vec2{ 300, 500 });
-
-		++count;
-
-		font(U"Siv3D").draw(50, Arg::rightCenter(780, 300), ColorF{ 0.1 });
-
-		font(U"Hello").draw(50, Arg::rightCenter(780, 400), ColorF{ 0.1 });
-
-		font(U"programming").draw(50, Arg::bottomCenter(Cursor::Pos()), ColorF{ 0.1 });
+		if (0.0 < timeLeft)
+		{
+			font(U"残り時間：{:.2f}"_fmt(timeLeft)).draw(40, 20, 20, Palette::Black);
+		}
+		else
+		{
+			font(U"ゲームオーバー").draw(40, 20, 20, Palette::Black);
+		}
 	}
 }
 
+// 前フレームからの経過時間を調べる　
+
+//while (System::Update())
+//{
+//	ClearPrint();
+//
+//	// 60 Hz の場合, 1/60 秒 (約 0.0166)
+//	const double deltaTime = Scene::DeltaTime();
+//
+//	Print << deltaTime;
+//}
+
+
+// 横方向移動し続ける
+
+//const Texture emoji{ U"☃️"_emoji };
+//
+//// 移動速度 (ピクセル / 秒)
+//const double velocity = 20;
+//
+//// 絵文字の X 座標
+//double x = 100;
+//
+//while (System::Update())
+//{
+//	x += (Scene::DeltaTime() * velocity);
+//
+//	emoji.drawAt(x, 300);
+//}
+
+
+// 回転し続ける
+
+//const Texture emoji{ U"🍣"_emoji };
+//
+//// 回転速度 (ラジアン / 秒)
+//const double angularVelocity = 90_deg;
+//
+//// 回転速度
+//double angle = 0_deg;
+//
+//while (System::Update())
+//{
+//	angle += (Scene::DeltaTime() * angularVelocity);
+//
+//	emoji.rotated(angle).drawAt(400, 300);
+//}
+
+
+// 図形を描く
+
+//Circle circle{ 200, 200, 100 };
+//
+//RectF rect{ 400, 300, 300, 200 };
+//
+//while (System::Update())
+//{
+//	circle.draw(Palette::Orange);
+//
+//	circle.drawFrame(2, 2, Palette::Red);
+//
+//	rect.draw(ColorF{ 0.5 });
+//
+//	RectF{ rect.x, rect.y, (rect.w * 0.5), rect.h }.draw(ColorF{ 0.3, 0.9, 0.6 });
+//
+//	rect.drawFrame(4, 4, ColorF{ 0.2 });
+//}
+
+
+// 図形を動かす
+
+//Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
+//
+//Circle circle{ 200, 300, 0 };
+//
+//RectF rect{ 300, 200, 300, 200 };
+//
+//while (System::Update())
+//{
+//	double deltaTime = Scene::DeltaTime();
+//
+//	circle.r += (deltaTime * 20);
+//
+//	rect.x += (deltaTime * 10);
+//
+//	circle.draw();
+//
+//	rect.draw(ColorF{ 0.5 });
+//}
+
+
+// 経過時間を蓄積する
+
+//Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
+//
+//const Font font{ FontMethod::MSDF, 48 };
+//
+//// 経過時間の蓄積（秒）
+//double accumulatedTime = 0.0;
+//
+//while (System::Update())
+//{
+//	accumulatedTime += Scene::DeltaTime();
+//
+//	font(U"経過時間: {:.2f}"_fmt(accumulatedTime)).draw(40, 20, 20, Palette::Black);
+//}
