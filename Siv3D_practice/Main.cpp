@@ -2,61 +2,63 @@
 
 void Main()
 {
-	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
+	Scene::SetBackground(Palette::White);
 
 	while (System::Update())
 	{
-		ClearPrint();
+		// 円を並べる
+		/*for (int32 i = 0; i < 5; ++i)
+		{
+			Circle{ (i * 100), 100, 30 }.draw(Palette::Skyblue);
+		}
 
-		// 現在のマウスカーソル座標を表示する
-		// Print << Cursor::Pos();
+		for (int32 i = 0; i < 5; ++i)
+		{
+			Circle{ (50 + i * 100), 200, 30 }.draw(Palette::Seagreen);
+		}*/
 
-		// 円を描く
-		// Circle{ 400, 300, 20 }.draw();
+		// 二重ループで円を並べる
+		/*for (int32 y = 0; y < 4; ++y) // 縦方向
+		{
+			for (int32 x = 0; x < 6; ++x) // 横方向
+			{
+				Circle{ (x * 100), (y * 100), 30 }.draw(Palette::Skyblue);
+			}
+		}*/
 
-		// マウスに付随する円を描く
-		// Circle{ Cursor::Pos(), 100 }.draw();
+		// 少し複雑な例
+		/*for (int32 y = 0; y < 4; ++y) // 縦方向
+		{
+			for (int32 x = 0; x < 6; ++x) // 横方向
+			{
+				if ((x + y) % 2 == 0)
+				{
+					Circle{ (x * 100), (y * 100), 10 }.draw(Palette::Skyblue);
+				}
+				else
+				{
+					Circle{ (x * 100), (y * 100), 30 }.draw(Palette::Skyblue);
+				}
+			}
+		}*/
 
-		// 色のついた円を描く
-		// Circle{ 100, 200, 40 }.draw(); // 色を指定しない場合は白色
-		// Circle{ 200, 200, 40 }.draw(Palette::Green);
-		// Circle{ 300, 200, 40 }.draw(ColorF{ 0.8 });
+		// 長方形を並べる
+		/*for (int32 x = 0; x < 6; ++x)
+		{
+			Rect{ (x * 100), 0, 80, 600 }.draw(Palette::Skyblue);
+		}*/
 
-		// 左に半透明の円を描く
-		// Circle{ 200, 300, 200 }.draw(ColorF{ 1.0, 0.0, 0.0, 0.9 });
+		// 色を徐々に変化させる
+		/*for (int32 x = 0; x < 6; ++x)
+		{
+			Rect{ (x * 100), 0, 80, 600 }.draw(ColorF{ 0.0, (x * 0.2), 1.0 });
+		}*/
 
-		// 右に半透明の円を描く
-		// Circle{ 600, 300, 200 }.draw(HSV{ 240.0, 0.5, 1.0, 0.2 });
-
-		// マウスカーソルの位置に半透明の円を描く
-		// Circle{ Cursor::Pos(), 100 }.draw(ColorF{ 0.0, 0.5 });
-
-		// 長方形を描く
-		// Rect{ 20, 40, 400, 100 }.draw();
-
-		// 正方形を描く
-		// Rect{ 100, 200, 80 }.draw(Palette::Orange);
-
-		const double w = (Scene::Time() * 20.0);
-
-		// 長方形を描く （値が double のときは Rect ではなく RectF とする）
-		RectF{ 20, 40, w, 100 }.draw();
-
-		// 長方形の枠を描く
-		Rect{ 100, 300, 100, 30 }.drawFrame(3, 0);
-
-		// 長方形の枠を描く
-		Rect{ 220, 300, 100, 30 }.drawFrame(0, 3);
-
-		// 長方形の枠を描く
-		Rect{ 200, 400, 400, 100 }.drawFrame( 3, 3, Palette::Orange );
-
-		// 円の枠を描く
-		Circle{ Cursor::Pos(), 40 }.drawFrame(1, 1, Palette::Seagreen);
-
-		// グラデーションで長方形を描く
-		Rect{ 0, 0, 600, 500 }.draw(Arg::top = ColorF{ 0.5, 0.7, 0.9 }, Arg::bottom = ColorF{ 0.5, 0.9, 0.7 });
-		
+		// 虹色
+		for (int32 x = 0; x < 10; ++x)
+		{
+			Rect{ (x * 80), 0, 80, 600 }.draw(HSV{ (x * 36), 0.5, 1.0 });
+		}
 	}
 }
 
