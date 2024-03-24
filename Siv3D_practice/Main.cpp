@@ -2,21 +2,50 @@
 
 void Main()
 {
-	Print << U"C++";
+	/*bool a = true;
 
-	Print << U"Hello, " << U"Siv3D"; // 複数に分けることもできる
+	int32 b = 123;
 
-	Print << 123;
+	double c = 0.5;
 
-	Print << 4.567;
+	size_t d = 100;
 
-	int32 count = 0;
+	Print << U"a: " << a;
+
+	Print << U"b: " << b;
+
+	Print << U"c: " << c;
+
+	Print << U"d: " << d;*/
+
+	//char32 a = U'A';
+
+	//String b = U"Hello";
+
+	//// FilePath は String の別名
+	//FilePath c = U"example/windmill.png";
+
+	//Print << U"a: " << a;
+
+	//Print << U"b: " << b;
+
+	//Print << U"c: " << c;
+
+	Array<int32> a = { 10, 20, 50, 100 };
+
+	Optional<double> b;
+
+	Print << U"a: " << a;
+
+	Print << U"b: " << b;
+
+	b = 12.3;
+
+	Print << U"b: " << b;
 
 	while (System::Update())
 	{
-		Print << count;
-
-		++count;
+		
 	}
 }
 
